@@ -226,7 +226,7 @@ window.login = async () => {
 
   try {
     await signInWithEmailAndPassword(auth, email, password);
-    location.href = "redes.html";
+    location.href = "main.html";
   } catch(err) {
     console.error(err);
     alert("Error al iniciar sesión. Verifica tu correo y contraseña.");
@@ -268,12 +268,12 @@ window.loginGoogle = async () => {
     const result = await signInWithPopup(auth, googleProvider);
     await setDoc(doc(db,"users",result.user.uid),{
       email: result.user.email,
-      role: "Miembro",
+      #####role: "Miembro",
       roleColor: "#ffd700",
       membership: "free",
       createdAt: new Date()
     }, { merge: true });
-    location.href = "redes.html";
+    location.href = "main.html";
   } catch(err){
     console.error(err);
   }
@@ -290,7 +290,7 @@ window.loginFacebook = async () => {
       membership: "free",
       createdAt: new Date()
     }, { merge: true });
-    location.href = "redes.html";
+    location.href = "main.html";
   } catch(err){
     console.error(err);
   }
