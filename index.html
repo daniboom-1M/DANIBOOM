@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DANIBOOM | LOGIN</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+  --neon:#ffd700;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Orbitron',sans-serif;
+}
+
+body{
+  background:radial-gradient(circle at top,#111,#000);
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  color:#fff;
+  overflow:hidden;
+}
+
+/* ===== ANIMACIÓN DE ENTRADA ===== */
+@keyframes fadeZoom {
+  from{
+    opacity:0;
+    transform:scale(.85) translateY(40px);
+  }
+  to{
+    opacity:1;
+    transform:scale(1) translateY(0);
+  }
+}
+
+.container{
+  width:100%;
+  max-width:420px;
+  padding:2.5rem;
+  border:2px solid var(--neon);
+  border-radius:22px;
+  box-shadow:0 0 35px rgba(255,215,0,.7);
+  animation:fadeZoom 1s ease;
+}
+
+/* ===== LOGO ===== */
+.logo{
+  text-align:center;
+  margin-bottom:1.5rem;
+}
+.logo img{
+  width:110px;
+  height:110px;
+  border-radius:50%;
+  border:3px solid var(--neon);
+  box-shadow:0 0 30px var(--neon);
+}
+
+/* ===== TABS ===== */
+.tabs{
+  display:flex;
+  margin-bottom:1.5rem;
+}
+.tabs button{
+  flex:1;
+  background:none;
+  border:none;
+  color:#777;
+  padding:.6rem;
+  cursor:pointer;
+  transition:.3s;
+}
+.tabs button.active{
+  color:var(--neon);
+  text-shadow:0 0 10px var(--neon);
+}
+
+/* ===== FORMULARIOS ===== */
+.form{
+  display:none;
+  opacity:0;
+  transform:translateX(40px);
+}
+
+.form.active{
+  display:block;
+  animation:slideIn .5s ease forwards;
+}
+
+@keyframes slideIn{
+  from{
+    opacity:0;
+    transform:translateX(40px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+.form h2{
+  text-align:center;
+  color:var(--neon);
+  margin-bottom:1rem;
+}
+
+.input{
+  width:100%;
+  padding:.9rem;
+  margin-bottom:.8rem;
+  background:#111;
+  border:2px solid #333;
+  border-radius:12px;
+  color:#fff;
+  transition:.3s;
+}
+.input:focus{
+  outline:none;
+  border-color:var(--neon);
+  box-shadow:0 0 10px var(--neon);
+}
+
+/* ===== BOTONES ===== */
+.btn{
+  width:100%;
+  padding:.9rem;
+  border:none;
+  border-radius:30px;
+  background:var(--neon);
+  color:#000;
+  font-weight:800;
+  cursor:pointer;
+  transition:.3s;
+}
+.btn:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 20px var(--neon);
+}
+
+/* ===== SOCIAL ===== */
+.social{
+  display:flex;
+  gap:.8rem;
+  margin-top:1rem;
+}
+.social button{
+  flex:1;
+  padding:.7rem;
+  border-radius:12px;
+  border:2px solid var(--neon);
+  background:none;
+  color:var(--neon);
+  cursor:pointer;
+  transition:.3s;
+}
+.social button:hover{
+  background:var(--neon);
+  color:#000;
+}
+.social i{
+  margin-right:6px;
+}
+
+/* ===== SWITCH ===== */
+.switch{
+  text-align:center;
+  margin-top:1rem;
+  font-size:13px;
+  color:#aaa;
+}
+.switch span{
+  color:var(--neon);
+  cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="logo">
+    <img src="logo.png" alt="DANIBOOM">
+  </div>
+
+  <div class="tabs">
+    <button id="tabLogin" class="active" onclick="showLogin()">INICIAR SESIÓN</button>
+    <button id="tabRegister" onclick="showRegister()">CREAR CUENTA</button>
+  </div>
+
+  <!-- LOGIN -->
+  <div class="form active" id="loginForm">
+    <h2>Bienvenido</h2>
+
+    <input id="loginEmail" class="input" placeholder="Correo electrónico">
+    <input id="loginPassword" type="password" class="input" placeholder="Contraseña">
+
+    <button class="btn" onclick="login()">Entrar</button>
+
+    <div class="social">
+      <button onclick="loginGoogle()"><i class="fab fa-google"></i>Google</button>
+      <button onclick="loginFacebook()"><i class="fab fa-facebook-f"></i>Facebook</button>
+    </div>
+
+    <p class="switch">
+      ¿No tienes cuenta? <span onclick="showRegister()">Crear cuenta</span>
+    </p>
+  </div>
+
+  <!-- REGISTRO -->
+  <div class="form" id="registerForm">
+    <h2>Crear cuenta</h2>
+
+    <input id="regEmail" class="input" placeholder="Correo electrónico">
+    <input id="regPassword" type="password" class="input" placeholder="Contraseña">
+
+    <button class="btn" onclick="register()">Crear cuenta</button>
+
+    <div class="social">
+      <button onclick="loginGoogle()"><i class="fab fa-google"></i>Google</button>
+      <button onclick="loginFacebook()"><i class="fab fa-facebook-f"></i>Facebook</button>
+    </div>
+
+    <p class="switch">
+      ¿Ya tienes cuenta? <span onclick="showLogin()">Iniciar sesión</span>
+    </p>
+  </div>
+
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.8.0/firebase-app.js";
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  GoogleAuthProvider,
+  FacebookAuthProvider,
+  signInWithPopup
+} from "https://www.gstatic.com/firebasejs/12.8.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyChOQg743fsmGK89KVLoNAri_VGklArRi4",
+  authDomain: "web1-3b83a.firebaseapp.com",
+  projectId: "web1-3b83a"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+const googleProvider = new GoogleAuthProvider();
+const facebookProvider = new FacebookAuthProvider();
+
+window.login = async () => {
+  if(!loginEmail.value || !loginPassword.value) return;
+  try{
+    await signInWithEmailAndPassword(auth, loginEmail.value, loginPassword.value);
+    location.href = "redes.html";
+  }catch{}
+};
+
+window.register = async () => {
+  if(!regEmail.value || !regPassword.value) return;
+  try{
+    await createUserWithEmailAndPassword(auth, regEmail.value, regPassword.value);
+    showLogin();
+  }catch{}
+};
+
+window.loginGoogle = async () => {
+  try{
+    await signInWithPopup(auth, googleProvider);
+    location.href = "redes.html";
+  }catch{}
+};
+
+window.loginFacebook = async () => {
+  try{
+    await signInWithPopup(auth, facebookProvider);
+    location.href = "redes.html";
+  }catch{}
+};
+
+window.showLogin = () => {
+  registerForm.classList.remove("active");
+  setTimeout(() => loginForm.classList.add("active"), 50);
+  tabLogin.classList.add("active");
+  tabRegister.classList.remove("active");
+};
+
+window.showRegister = () => {
+  loginForm.classList.remove("active");
+  setTimeout(() => registerForm.classList.add("active"), 50);
+  tabRegister.classList.add("active");
+  tabLogin.classList.remove("active");
+};
+</script>
+
+</body>
+</html>
